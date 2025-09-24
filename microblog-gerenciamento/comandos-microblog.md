@@ -11,7 +11,7 @@ CREATE DATABASE microblog_amorim CHARACTER SET utf8mb4;
 -- Criar a tabela usuarios 
 
 CREATE TABLE usuarios(
-    id_usuarios INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id_usuario INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE usuarios(
 
 CREATE TABLE noticias(
     id_noticias INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    id_usuarios INT NOT NULL,
+    id_usuario INT NOT NULL,
     data_publicacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     extensao_imagem VARCHAR(100) NOT NULL,
     titulo VARCHAR(100) NOT NULL,
