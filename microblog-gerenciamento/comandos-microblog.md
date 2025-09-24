@@ -1,9 +1,12 @@
+## Criando Bando de Dados
+
 ``` SQL
 -- Criar o banco de dados 
 
 CREATE DATABASE microblog_amorim CHARACTER SET utf8mb4;
 ```
 
+## Criando a tabela usuarios
 ``` SQL
 -- Criar a tabela usuarios 
 
@@ -16,6 +19,7 @@ CREATE TABLE usuarios(
 );
 ```
 
+## Criando a tabela noticias
 ``` SQL
 -- Criar a tabela noticias
 
