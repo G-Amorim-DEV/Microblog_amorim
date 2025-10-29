@@ -5,7 +5,7 @@
 ### Criar o banco de dados
 
 ```sql
-CREATE DATABASE microblog_fullstack CHARACTER SET utf8mb4;
+CREATE DATABASE microblog_amorim CHARACTER SET utf8mb4;
 ```
 
 ### Criar a tabela usuarios
