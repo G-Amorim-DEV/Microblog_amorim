@@ -62,8 +62,8 @@ class Usuario{
     private function setTipo(string $valorTipo):void{
         $this->tipo = $valorTipo;
     }
-    
-    private function setId(string $valorId):void{
+
+    private function setId(?int $valorId):void{
         $this->id = $valorId;
     }
 }
