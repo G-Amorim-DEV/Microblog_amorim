@@ -12,6 +12,8 @@ class UsuarioServico{
     }
 
     /* Métodos CRUD para Usuários */
+
+    //Inserir (INSERT)
     public function inserir(Usuario $dadosDoUsuario):void{
 
         $sql = "INSERT INTO usuarios(nome, email, tipo, senha) VALUES (:nome, :email, :tipo, :senha)";
@@ -24,7 +26,17 @@ class UsuarioServico{
 
         $consulta->execute();
 
-
-
     }
+
+    //buscar (SELECT)
+
+    public function buscar(): array {
+        $sql = "SELECT * FROM usuarios ORDER BY nome";
+
+       $consulta = $this->conexao->query($sql);
+
+       return $consulta->fetchAll();
+    }
+
+
 }

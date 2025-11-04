@@ -42,6 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			//Redireciona para a página usuarios
 			Utils::redirecionarPara('usuarios.php');
 
+			$sucesso = true;
+
 		} catch (Throwable $e) {
 			/* Se alguma ação dentro do try falhar, o PHP vai lancar (usando a classe Throwable) um erro/exceção. AO usar o parâmetro "e" (ou outro nome), temos acesso aos detalhes do que aconteceu*/
 			$erro = "Erro ao inserir usuário.".$e->getMessage();

@@ -1,4 +1,26 @@
-<?php 
+<?php
+require_once "../src/Database/conecta.php";
+
+require_once "../src/Services/UsuarioServico.php";
+
+require_once "../src/Helpers/Utils.php";
+
+//Inicialização
+$erro = null;
+
+$usuarios = [];
+
+$usuarioServico = new UsuarioServico();
+
+try {
+	$usuarios = $usuarioServico->buscar();
+	// Utils::dump($usuarios);
+
+} catch (\Throwable $e) {
+	$erro = "Erro ao buscar usários. <br>" . $e->getMessage();
+}
+
+
 require_once "../includes/cabecalho-admin.php";
 
 ?>
@@ -6,17 +28,21 @@ require_once "../includes/cabecalho-admin.php";
 
 <div class="row">
 	<article class="col-12 bg-white rounded shadow my-1 py-4">
-		
-		<h2 class="text-center">Usuários <span class="badge bg-dark">X</span></h2>
+
+		<h2 class="text-center">Usuários <span class="badge bg-dark"><?=count($usuarios)?>u</span></h2>
+
+		<?php if ($erro): ?>
+			<p class="alert alert-danger text-center"><?= $erro ?></p>
+		<?php endif; ?>
 
 		<p class="text-center mt-5">
 			<a class="btn btn-primary" href="usuario-insere.php">
-			<i class="bi bi-plus-circle"></i>	
-			Inserir novo usuário</a>
+				<i class="bi bi-plus-circle"></i>
+				Inserir novo usuário</a>
 		</p>
-				
+
 		<div class="table-responsive">
-		
+
 			<table class="table table-hover">
 				<thead class="table-light">
 					<tr>
@@ -29,34 +55,34 @@ require_once "../includes/cabecalho-admin.php";
 
 				<tbody>
 
-				
+				<?php foreach ($usuarios as $usuario){ ?>
+		
 					<tr>
-						<td> nome do usuário... </td>
-						<td> email do usuário... </td>
-						<td> tipo do usuário... </td>
+						<td> <?= $usuario['nome'] ?> </td>
+						<td> <?= $usuario['email'] ?> </td>
+						<td> <?= $usuario['tipo'] ?> </td>
 						<td class="text-center">
-							<a class="btn btn-warning" 
-							href="usuario-atualiza.php">
-							<i class="bi bi-pencil"></i> Atualizar
+							<a class="btn btn-warning"
+								href="usuario-atualiza.php">
+								<i class="bi bi-pencil"></i> Atualizar
 							</a>
-						
-							<a class="btn btn-danger excluir" 
-							href="usuario-exclui.php">
-							<i class="bi bi-trash"></i> Excluir
+
+							<a class="btn btn-danger excluir"
+								href="usuario-exclui.php">
+								<i class="bi bi-trash"></i> Excluir
 							</a>
 						</td>
 					</tr>
-				
+				<?php } ?>
 
-				</tbody>                
+				</tbody>
 			</table>
-	</div>
-		
+		</div>
+
 	</article>
 </div>
 
 
-<?php 
+<?php
 require_once "../includes/rodape-admin.php";
 ?>
-
