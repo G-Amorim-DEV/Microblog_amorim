@@ -29,7 +29,7 @@ require_once "../includes/cabecalho-admin.php";
 <div class="row">
 	<article class="col-12 bg-white rounded shadow my-1 py-4">
 
-		<h2 class="text-center">Usuários <span class="badge bg-dark"><?=count($usuarios)?>u</span></h2>
+		<h2 class="text-center">Usuários <span class="badge bg-dark"><?=count($usuarios)?></span></h2>
 
 		<?php if ($erro): ?>
 			<p class="alert alert-danger text-center"><?= $erro ?></p>
