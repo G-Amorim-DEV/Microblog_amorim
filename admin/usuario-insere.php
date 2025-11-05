@@ -94,7 +94,7 @@ require_once "../includes/cabecalho-admin.php";
 			<div class="mb-3">
 				<label class="form-label" for="tipo">Tipo:</label>
 				<select required class="form-select" name="tipo" id="tipo">
-					<option value=""></option>
+					<option value="">--Selecione um tipo de Usuário--</option>
 					<option value="editor">Editor</option>
 					<option value="admin">Administrador</option>
 				</select>
