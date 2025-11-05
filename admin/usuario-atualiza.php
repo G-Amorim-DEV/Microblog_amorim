@@ -37,6 +37,19 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 			$email = Utils::sanitizar($_POST['email'], 'email');
 			$tipo = Utils::sanitizar($_POST['tipo']);
 
+			 /* Se o campo senha estiver, manter a senha existente. Caso contrário, verifique as senhas (digitada no formulário e a do banco de dados).*/
+
+			 $senha = empty($_POST['senha'] ? $dados['senha'] : Utils::verificarSenha($_POST['senha'], $dados['senha']));
+
+			 //Montando um objeto com os dados do usuario
+			 $usuario = new Usuario($nome, $email, $senha, $tipo, $id);
+
+			 //Executar o serviço para atualizar
+			 $usuarioServico->atualizar($usuario);
+
+			 //Redirecionar para a lista de usuarios
+			 Utils::redirecionarPara('usuarios.php');
+
 		} catch (\Throwable $e) {
 			$erro = "Nome, E-mail e Tipo são obrigatórios";
 		}
