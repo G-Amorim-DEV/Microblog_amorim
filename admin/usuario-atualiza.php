@@ -26,6 +26,23 @@ try {
 	$erro = "Erro ao buscar usuário. <br>".$e->getMessage();
 }
 
+//Detectar se o formulário foi acionado para atualizar o usuário
+
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+	if(empty($_POST['nome']) || ($_POST['email']) || ($_POST['tipo'])){
+		$erro = "Nome, E-mail e Tipo são obrigatórios";
+	} else{
+		try {
+			$nome = Utils::sanitizar($_POST['nome']);
+			$email = Utils::sanitizar($_POST['email'], 'email');
+			$tipo = Utils::sanitizar($_POST['tipo']);
+
+		} catch (\Throwable $e) {
+			$erro = "Nome, E-mail e Tipo são obrigatórios";
+		}
+	}
+}
+
 
 require_once "../includes/cabecalho-admin.php";
 ?>

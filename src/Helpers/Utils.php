@@ -25,6 +25,20 @@ class Utils
         return password_hash($valorSenha, PASSWORD_DEFAULT);
     }
 
+    /* Ao chamar o método verificarSenha, passamos pra ele a senha digitada no formulário e a senha existente no bando de dados. */
+    public static function verificarSenha(
+        string $senhaDigitadaNoFormulario, string $senhaArmazenadaNoBanco
+    ){
+        /*  Ussamos o password_verify para comparar as duas senhas */
+        if(password_verify($senhaDigitadaNoFormulario, $senhaArmazenadaNoBanco)){
+            ////São iguais? Então retorne a mesma senha já existente no banco de dados.
+            return $senhaArmazenadaNoBanco;
+        }else{
+            //São diferentes? Então pega a senha digitada e faça um novo hash
+            return self::codificarSenha($senhaDigitadaNoFormulario);
+        }
+    }
+
     /* Exercício: crie um método chamado dump, faça ele receber um parãmetro chamado $dados, efaça aparecer o var_dump dentro da tag <pre> */
 
     public static function dump(mixed $dados): void
@@ -34,8 +48,11 @@ class Utils
         echo '</pre>';
     }
 
+    /* Exercício: crie um método chamado redirecionar, faça ele receber um parãmetro chamado $paginaDestino, e faça com que ele redirecione as páginas de maneira que possa ser usado em outras páginas */
    public static function redirecionarPara(string $paginaDestino):void {
     header("Location: " . $paginaDestino);
     exit;
+
+
 }
 }
