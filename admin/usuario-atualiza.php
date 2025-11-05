@@ -1,4 +1,25 @@
 <?php
+
+require_once "../src/Database/conecta.php";
+
+require_once "../src/Models/usuario.php";
+
+require_once "../src/Services/UsuarioServico.php";
+
+require_once "../src/Helpers/Utils.php";
+
+$id = Utils::sanitizar($_GET['id'], 'inteiro');
+
+//Se não houver id válido na URL, faça volvar para página usuários
+if(!$id) Utils::redirecionarPara('usuarios.php');
+
+//inicialização
+
+$erro = null;
+
+$usuarioServico = new UsuarioServico();
+
+
 require_once "../includes/cabecalho-admin.php";
 ?>
 
