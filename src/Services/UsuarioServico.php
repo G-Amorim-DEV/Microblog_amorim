@@ -74,4 +74,14 @@ class UsuarioServico{
         $consulta->execute();
     }
 
+ function excluir(Usuario $dadosDoID) {
+    $sql = "DELETE FROM usuarios WHERE id = :id";
+
+    $consulta = $this->conexao->prepare($sql);
+
+    $consulta->bindValue(":id", $dadosDoID->getId());
+
+    $consulta->execute();
+}
+
 }
