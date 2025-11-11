@@ -1,10 +1,20 @@
 <?php 
 require_once "includes/cabecalho.php";
+
+/*  Mensagens do processo de login/logout */
+
+if(isset($_GET['acesso_proibido'])){
+    $mensagem = "Você deve logar primeiro!!! 😒🤦‍♂️😡";
+}
 ?>
 
 <div class="row">
     <div class="bg-white rounded shadow col-12 my-1 py-4">
         <h2 class="text-center fw-light">Acesso à área administrativa</h2>
+
+        <?php if(isset($mensagem)):?>
+            <p class="alert alert-warning text-center my-2"><?= $mensagem?><p/>
+            <?php endif;?>
 
         <form action="" method="post" id="form-login" name="form-login" class="mx-auto w-50" autocomplete="off">
 			
