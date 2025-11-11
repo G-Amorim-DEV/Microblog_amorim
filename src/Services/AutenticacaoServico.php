@@ -21,5 +21,16 @@ Class AutenticacaoServico{
             Utils::redirecionarPara("../login.php?acesso_proibido");
         }
     }
+
+    public static function login(int $valorId, string $valorNome, string $valorTipo):void{
+
+        // Criando variáveis de sessão com os dados informados
+        $_SESSION['id'] = $valorId;
+        $_SESSION['nome'] = $valorNome;
+        $_SESSION['tipo'] = $valorTipo;
+
+        // Após logar, vá para admin/index.php
+        Utils::redirecionarPara("admin/");
+    }
 }
 ?>
