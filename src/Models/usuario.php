@@ -63,7 +63,7 @@ class Usuario{
         $this->tipo = $valorTipo;
     }
 
-    private function setId(?int $valorId):void{
+    public function setId(?int $valorId):void{
         $this->id = $valorId;
     }
 }

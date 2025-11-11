@@ -2,10 +2,12 @@
 
 //src\Services\UsuarioServico.php
 
-class UsuarioServico{
+class UsuarioServico
+{
     private PDO $conexao;
 
-    public function __construct(){
+    public function __construct()
+    {
 
         /* Toda vez que criamos um objetos baseado na classe UsuarioServico, este objeto fará uma chamada ao método de conexão na classe Conecta */
         $this->conexao = Conecta::getConexao();
@@ -14,33 +16,35 @@ class UsuarioServico{
     /* Métodos CRUD para Usuários */
 
     //Inserir (INSERT)
-    public function inserir(Usuario $dadosDoUsuario):void{
+    public function inserir(Usuario $dadosDoUsuario): void
+    {
 
         $sql = "INSERT INTO usuarios(nome, email, tipo, senha) VALUES (:nome, :email, :tipo, :senha)";
 
         $consulta = $this->conexao->prepare($sql);
-        $consulta ->bindValue(":nome", $dadosDoUsuario->getNome());
-        $consulta ->bindValue(":email", $dadosDoUsuario->getEmail());
-        $consulta ->bindValue(":tipo", $dadosDoUsuario->getTipo());
-        $consulta ->bindValue(":senha", $dadosDoUsuario->getSenha());
+        $consulta->bindValue(":nome", $dadosDoUsuario->getNome());
+        $consulta->bindValue(":email", $dadosDoUsuario->getEmail());
+        $consulta->bindValue(":tipo", $dadosDoUsuario->getTipo());
+        $consulta->bindValue(":senha", $dadosDoUsuario->getSenha());
 
         $consulta->execute();
-
     }
 
     //buscar (SELECT)
 
-    public function buscar(): array {
+    public function buscar(): array
+    {
         $sql = "SELECT * FROM usuarios ORDER BY nome";
 
-       $consulta = $this->conexao->query($sql);
+        $consulta = $this->conexao->query($sql);
 
-       return $consulta->fetchAll();
+        return $consulta->fetchAll();
     }
 
     //buscarPorId (SELECT/WHERE)
 
-    public function buscarPorId(int $valorID): ?array{
+    public function buscarPorId(int $valorID): ?array
+    {
         $sql = "SELECT * FROM usuarios WHERE id = :id";
         $consulta = $this->conexao->prepare($sql);
         $consulta->bindValue(":id", $valorID);
@@ -55,7 +59,8 @@ class UsuarioServico{
 
     //atualizar (UPDATE/WHERE)
 
-    public function atualizar (Usuario $dadosDoUsuario): void {
+    public function atualizar(Usuario $dadosDoUsuario): void
+    {
         $sql = "UPDATE usuarios SET
             nome = :nome,
             email = :email,
@@ -74,14 +79,13 @@ class UsuarioServico{
         $consulta->execute();
     }
 
- function excluir(Usuario $dadosDoID) {
-    $sql = "DELETE FROM usuarios WHERE id = :id";
+    public function excluir(Usuario $dadosDoID): void
+    {
+        $sql = "DELETE FROM usuarios WHERE id = :id";
 
-    $consulta = $this->conexao->prepare($sql);
+        $consulta = $this->conexao->prepare($sql);
+        $consulta->bindValue(":id", $dadosDoID->getId(), PDO::PARAM_INT);
 
-    $consulta->bindValue(":id", $dadosDoID->getId());
-
-    $consulta->execute();
-}
-
+        $consulta->execute();
+    }
 }
