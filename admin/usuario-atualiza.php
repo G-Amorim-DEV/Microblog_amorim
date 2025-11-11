@@ -8,6 +8,12 @@ require_once "../src/Services/UsuarioServico.php";
 
 require_once "../src/Helpers/Utils.php";
 
+require_once "../src/Helpers/Utils.php";
+
+require_once  "../src/Services/AutenticacaoServico.php";
+
+AutenticacaoServico::exigirLogin();
+
 $id = Utils::sanitizar($_GET['id'], 'inteiro');
 
 //Se não houver id válido na URL, faça volvar para página usuários

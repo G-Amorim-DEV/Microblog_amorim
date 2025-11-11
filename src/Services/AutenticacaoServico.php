@@ -1,8 +1,6 @@
 <?php 
 // src\Services\AutenticacaoServico.php
 
-require_once "src/Helpers/Utils.php";
-
 Class AutenticacaoServico{
 
     public static function iniciarSessao():void {
