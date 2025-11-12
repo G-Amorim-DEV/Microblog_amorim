@@ -24,21 +24,33 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         // Busca pelo usuário através do e-mail
 
-        $usuario = $usuarioServico->buscarPorEmail($email);       
+        $dadosDoUsuario = $usuarioServico->buscarPorEmail($email);       
 
         // Se não estiver usuário/usuário inválido, redirecione para login.php
 
-        if (!$usuario) {
-            Utils::redirecionarPara("login.php");
+        if (!$dadosDoUsuario) {
+            Utils::redirecionarPara("login.php?dados_incorretos");
         } else {
-           Utils::redirecionarPara("login.php?email_senha_invalido"); // 
+            
+            // Caso contrário, verifique a senha
+            if(password_verify($senha, $dadosDoUsuario['senha'])){
+
+                echo "Entrou";
+
+                // Estando correta, faça o login
+                AutenticacaoServico::login($dadosDoUsuario['id'], $dadosDoUsuario['nome'], $dadosDoUsuario['tipo']);
+         
+
+            }else{
+
+                // Estando errada, mantenha em login.php
+
+                Utils::redirecionarPara("login.php?dados_incorretos");
+
+               
+            }      
+            
         }
-
-        // Caso contrário, verifique a senha
-
-        // Estando correta, faça o login
-
-        // Estando errada, mantenha em login.php
 
     }
 }
@@ -52,6 +64,10 @@ if(isset($_GET['acesso_proibido'])){
 }elseif(isset($_GET['campos_obrigatorios'])){
 
     $mensagem = "Preencha o e-mail e a senha. Esses campos são obrigatórios para acessar a página.😡😡😡";
+
+}elseif(isset($_GET['dados_incorretos'])){
+
+     $mensagem = "⚠️ E-mail/Senha incorretos. Digite novamente para ter acesso.😡😡😡";
 
 }
 

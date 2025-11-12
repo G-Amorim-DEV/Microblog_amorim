@@ -93,7 +93,7 @@ class UsuarioServico
 
         $sql = "SELECT * FROM usuarios WHERE email = :email";
         $consulta = $this->conexao->prepare($sql);
-        $consulta->bindValue(":id", $email);
+        $consulta->bindValue(":email", $email);
         $consulta->execute();
 
         /* A expressão no return é TRUE? 
