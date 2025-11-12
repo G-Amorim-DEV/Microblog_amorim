@@ -34,5 +34,15 @@ Class AutenticacaoServico{
         // Após logar, vá para admin/index.php
         Utils::redirecionarPara("admin/");
     }
+
+    public static function logout():void{
+
+        self::iniciarSessao();
+
+        session_destroy();
+
+        Utils::redirecionarPara("../login.php?saiu");
+
+    }
 }
 ?>

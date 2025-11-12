@@ -69,6 +69,8 @@ if(isset($_GET['acesso_proibido'])){
 
      $mensagem = "⚠️ E-mail/Senha incorretos. Digite novamente para ter acesso.😡😡😡";
 
+}elseif (isset($_GET['saiu'])) {
+    $mensagem = "✅ Usuário deslogado com sucesso. Faça o login novamente para acessar a página.👍🤩😴";
 }
 
 require_once "includes/cabecalho.php";
