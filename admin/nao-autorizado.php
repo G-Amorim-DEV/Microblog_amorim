@@ -1,5 +1,13 @@
 <?php 
 
+// admin\nao-autorizado.php
+
+require_once "../src/Helpers/Utils.php";
+
+require_once "../src/Services/AutenticacaoServico.php";
+
+AutenticacaoServico::exigirLogin();
+
 require_once "../includes/cabecalho-admin.php";
 ?>
 
@@ -8,7 +16,7 @@ require_once "../includes/cabecalho-admin.php";
     <div class="container-fluid py-1">        
         <h2 class="display-4 bg-warning rounded text-center">Não autorizado!</h2>
         <hr class="my-4">
-        <p class="fs-5 text-center"><b> Fulano(a) </b>, você <span class="badge bg-danger">não tem permissão </span> para acessar este recurso.</p>
+        <p class="fs-5 text-center"><b> <?= $_SESSION['nome'] ?> </b>, você <span class="badge bg-danger">não tem permissão </span> para acessar este recurso.</p>
         <hr class="my-4">
 
         <p>

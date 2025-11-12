@@ -11,6 +11,8 @@ require_once  "../src/Services/AutenticacaoServico.php";
 
 AutenticacaoServico::exigirLogin();
 
+AutenticacaoServico::exigirAdmin();
+
 $id = isset($_GET['id']) ? Utils::sanitizar($_GET['id'], 'inteiro') : null;
 $usuarioServico = new UsuarioServico();
 

@@ -12,6 +12,8 @@ require_once  "../src/Services/AutenticacaoServico.php";
 
 AutenticacaoServico::exigirLogin();
 
+AutenticacaoServico::exigirAdmin();
+
 
 
 //Variável que será usada para montar mensagem de erro personalizadas

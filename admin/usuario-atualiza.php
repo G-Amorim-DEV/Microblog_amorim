@@ -14,6 +14,8 @@ require_once  "../src/Services/AutenticacaoServico.php";
 
 AutenticacaoServico::exigirLogin();
 
+AutenticacaoServico::exigirAdmin();
+
 $id = Utils::sanitizar($_GET['id'], 'inteiro');
 
 //Se não houver id válido na URL, faça volvar para página usuários
