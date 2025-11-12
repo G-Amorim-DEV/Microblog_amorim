@@ -88,4 +88,18 @@ class UsuarioServico
 
         $consulta->execute();
     }
+
+    public function buscarPorEmail($email): ?array{
+
+        $sql = "SELECT * FROM usuarios WHERE email = :email";
+        $consulta = $this->conexao->prepare($sql);
+        $consulta->bindValue(":id", $email);
+        $consulta->execute();
+
+        /* A expressão no return é TRUE? 
+        Então retorna os daodos como array (fetch)
+        Senão, retorna null. */
+
+        return $consulta->fetch() ?: null;
+    }
 }

@@ -16,7 +16,29 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     }else{
 
-        echo "Tudo preenchido";
+        // Captura e-mail e senha
+
+        $email = Utils::sanitizar($_POST['email'], 'email');
+
+        $senha = $_POST['senha'];
+
+        // Busca pelo usuário através do e-mail
+
+        $usuario = $usuarioServico->buscarPorEmail($email);       
+
+        // Se não estiver usuário/usuário inválido, redirecione para login.php
+
+        if (!$usuario) {
+            Utils::redirecionarPara("login.php");
+        } else {
+           Utils::redirecionarPara("login.php?email_senha_invalido"); // 
+        }
+
+        // Caso contrário, verifique a senha
+
+        // Estando correta, faça o login
+
+        // Estando errada, mantenha em login.php
 
     }
 }
