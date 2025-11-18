@@ -35,7 +35,6 @@ try {
 }
 
 //Detectar se o formulário foi acionado para atualizar o usuário
-
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
 	if(empty($_POST['nome']) || ($_POST['email']) || ($_POST['tipo'])){
 		$erro = "Nome, E-mail e Tipo são obrigatórios";
