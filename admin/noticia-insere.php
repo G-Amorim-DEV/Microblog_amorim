@@ -28,9 +28,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 		$texto = Utils::sanitizar($_POST['texto']);
 		$resumo = Utils::sanitizar($_POST['resumo']);
 
-		// Capturando o arquivo enviado peçp input file no html
+		// Capturando o arquivo enviado peça input file no html
 		$arquivo = $_FILES['imagem'];
-		Utils::dump($arquivo);
+		/* Utils::dump($arquivo); */
+
+		Utils::upload($arquivo);
+
+		$imagem = $arquivo['name'];
+
+		$noticia = new Noticia($titulo, $texto, $resumo, $imagem, $_SESSION['id']);
+
+		$noticiaServico->inserir($noticia);
+
+		Utils::redirecionarPara('noticias.php');
 
 
 		} catch(Throwable $e){
