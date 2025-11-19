@@ -45,7 +45,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 		} catch(Throwable $e){
 
-			$erro = "Erro ao inserir notícia.".$e->getMessage();
+			$erro = "Erro ao inserir notícia. <br>".$e->getMessage();
 		}
 	}
 }
