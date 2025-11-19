@@ -52,7 +52,16 @@ class Utils
    public static function redirecionarPara(string $paginaDestino):void {
     header("Location: " . $paginaDestino);
     exit;
+    }
 
+    public static function formatarDate($dataHora){
+        try {
+            $dt = new DateTime($dataHora);
+            return $dt->format('d/m/y H:i');
 
-}
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
 }

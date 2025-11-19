@@ -64,7 +64,7 @@ require_once "../includes/cabecalho-admin.php";
 						<?php foreach ($noticias as $noticia) { ?>
 
                         <td> <?= $noticia['titulo'] ?></td>
-                        <td> <?= $noticia['data'] ?> </td>
+                        <td> <?= Utils::formatarDate($noticia['data'])?> </td>
 						<td> <?= $noticia['autor'] ?> </td>
 						
 
