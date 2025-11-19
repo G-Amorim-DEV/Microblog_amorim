@@ -27,13 +27,14 @@ class Utils
 
     /* Ao chamar o método verificarSenha, passamos pra ele a senha digitada no formulário e a senha existente no bando de dados. */
     public static function verificarSenha(
-        string $senhaDigitadaNoFormulario, string $senhaArmazenadaNoBanco
-    ){
+        string $senhaDigitadaNoFormulario,
+        string $senhaArmazenadaNoBanco
+    ) {
         /*  Ussamos o password_verify para comparar as duas senhas */
-        if(password_verify($senhaDigitadaNoFormulario, $senhaArmazenadaNoBanco)){
+        if (password_verify($senhaDigitadaNoFormulario, $senhaArmazenadaNoBanco)) {
             ////São iguais? Então retorne a mesma senha já existente no banco de dados.
             return $senhaArmazenadaNoBanco;
-        }else{
+        } else {
             //São diferentes? Então pega a senha digitada e faça um novo hash
             return self::codificarSenha($senhaDigitadaNoFormulario);
         }
@@ -49,19 +50,65 @@ class Utils
     }
 
     /* Exercício: crie um método chamado redirecionar, faça ele receber um parãmetro chamado $paginaDestino, e faça com que ele redirecione as páginas de maneira que possa ser usado em outras páginas */
-   public static function redirecionarPara(string $paginaDestino):void {
-    header("Location: " . $paginaDestino);
-    exit;
+    public static function redirecionarPara(string $paginaDestino): void
+    {
+        header("Location: " . $paginaDestino);
+        exit;
     }
 
-    public static function formatarDate($dataHora){
+    public static function formatarDate($dataHora)
+    {
         try {
             $dt = new DateTime($dataHora);
             return $dt->format('d/m/y H:i');
-
         } catch (Exception $e) {
             return false;
         }
     }
 
+    public static function upload(?array $arquivo): void
+    {
+
+        /* Validação Incial:: Verifica se:
+            - não tem arquivo;
+            - não existe açguma referência na área temporária;
+            - não for um arquivo que possa/permita envio/upload. */
+        if (
+            !$arquivo ||
+            !isset($arquivo["tmp_name"]) ||
+            !is_uploaded_file($arquivo["tmp_name"])
+        ) {
+            throw new Exception("Nenhum arquivo válido foi enviado.");
+        }
+
+        // Definindo uma pasta no servidor/site para receber a imagem enviada
+        $pastaDeDestino = "../images/";
+
+        // Validação do formato de imagem 
+        $formatosPermitidos = ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'];
+
+        // Definindo um tamanho máximo para imagens
+        $tamanhoMaximo = 2 * 1024 * 1024; // 2MB
+
+        // Detectando o formato REAL dos ARQUIVOS
+        $formatoDoArquivoEnviado = mime_content_type($arquivo["tmp_name"]);
+
+        // Se formato NÃO ESTIVER na lista de formatos permitidos
+        if (!in_array($formatoDoArquivoEnviado, $formatosPermitidos)) {
+            throw new Exception("Apenas arquivos JPG, PNG, GIF e SVG são permitidos.");
+        }
+
+        // Se o tamanho do arquivo enviado for acima do máximo
+        if ($arquivo["size"] > $tamanhoMaximo) {
+            throw new Exception("O arquivo é muito grande. Tamanho máximo: 2MB.");
+        }
+
+        // Montando o nome/caminho di arquivo que será guardado na pasta Imagens.
+        $nomeDoArquivo = $pastaDeDestino . basename($arquivo["name"]);
+
+        // Se NÃO CONSEGUIR execultar a função move_uploaded_file, lançar exeção
+        if (!move_uploaded_file($arquivo["tmp_name"], $nomeDoArquivo)) {
+            throw new Exception("Erro ao mover o arquivo. Código de erro: " . $arquivo["error"]);
+        }
+    }
 }
