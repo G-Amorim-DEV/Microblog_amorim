@@ -60,7 +60,7 @@ class Utils
     {
         try {
             $dt = new DateTime($dataHora);
-            return $dt->format('d/m/y H:i');
+            return $dt->format('d/m/Y H:i');
         } catch (Exception $e) {
             return false;
         }
